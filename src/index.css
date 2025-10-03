@@ -1,0 +1,780 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 150 10% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 150 10% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 150 10% 15%;
+
+    --primary: 142 76% 36%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 150 20% 96%;
+    --secondary-foreground: 150 15% 25%;
+
+    --muted: 150 15% 97%;
+    --muted-foreground: 150 10% 45%;
+
+    --accent: 142 25% 92%;
+    --accent-foreground: 150 15% 20%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 150 15% 90%;
+    --input: 150 15% 94%;
+    --ring: 142 76% 36%;
+
+    --radius: 0.75rem;
+    
+    --sidebar-background: 150 20% 98%;
+    --sidebar-foreground: 150 15% 15%;
+    --sidebar-primary: 142 76% 36%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 150 20% 94%;
+    --sidebar-accent-foreground: 150 15% 15%;
+    --sidebar-border: 150 15% 88%;
+    --sidebar-ring: 142 76% 36%;
+
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 98%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 98%;
+
+    --info: 142 50% 55%;
+    --info-foreground: 0 0% 98%;
+
+    --wiggly-50: 150 30% 98%;
+    --wiggly-100: 150 25% 95%;
+    --wiggly-200: 150 20% 90%;
+    --wiggly-300: 142 30% 80%;
+    --wiggly-400: 142 45% 65%;
+    --wiggly-500: 142 76% 36%;
+    --wiggly-600: 142 80% 30%;
+    --wiggly-700: 142 85% 25%;
+    --wiggly-800: 142 90% 20%;
+    --wiggly-900: 142 95% 15%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html, body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    overflow-x: hidden;
+    width: 100%;
+    height: 100%;
+    max-width: 100vw;
+  }
+  
+  /* Improve scrolling on various elements */
+  .overflow-auto, .overflow-y-auto, .overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Custom scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary/20 rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary/30;
+  }
+  
+  /* Improved scrollbars for templates container */
+  .templates-container::-webkit-scrollbar {
+    width: 3px;
+  }
+  
+  .templates-container::-webkit-scrollbar-track {
+    @apply bg-muted/10 rounded-full;
+  }
+  
+  .templates-container::-webkit-scrollbar-thumb {
+    @apply bg-primary/30 rounded-full;
+  }
+  
+  .templates-container::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary/50;
+  }
+}
+
+@layer components {
+  /* Mobile-first responsive components */
+  .stat-card {
+    @apply rounded-lg border bg-card p-2 sm:p-4 shadow-sm transition-all hover:shadow-md text-sm sm:text-base;
+  }
+  
+  .animated-gradient {
+    background: linear-gradient(-45deg, hsl(var(--wiggly-500)), hsl(var(--wiggly-700)), hsl(var(--wiggly-600)), hsl(var(--wiggly-500)));
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+  }
+  
+  @keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+  }
+  
+  /* Glass effect */
+  .glass {
+    @apply bg-white/10 dark:bg-black/10 backdrop-blur-md border border-white/20 dark:border-white/10;
+  }
+  
+  /* Card hover effects */
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+  }
+  
+  /* Text gradient effects */
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary via-blue-500 to-primary/80 bg-clip-text text-transparent;
+  }
+  
+  /* Animated background */
+  .bg-animate {
+    background-size: 400% 400%;
+    animation: gradientBg 15s ease infinite;
+  }
+  
+  @keyframes gradientBg {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  /* Glow effects */
+  .glow {
+    box-shadow: 0 0 15px rgba(var(--primary), 0.5);
+  }
+  
+  .glow-text {
+    text-shadow: 0 0 8px rgba(var(--primary), 0.7);
+  }
+  
+  .profit {
+    @apply text-success;
+  }
+  
+  .loss {
+    @apply text-destructive;
+  }
+  
+  /* Status indicators */
+  .status-dot {
+    @apply h-1.5 sm:h-2 w-1.5 sm:w-2 rounded-full;
+  }
+  
+  .status-dot.online {
+    @apply bg-success animate-pulse;
+  }
+  
+  .status-dot.offline {
+    @apply bg-destructive;
+  }
+  
+  /* Badge styles */
+  .badge-success {
+    @apply bg-success/10 text-success border-success/20 text-xs sm:text-sm;
+  }
+  
+  .badge-error {
+    @apply bg-destructive/10 text-destructive border-destructive/20 text-xs sm:text-sm;
+  }
+  
+  .badge-warning {
+    @apply bg-warning/10 text-warning border-warning/20 text-xs sm:text-sm;
+  }
+  
+  .badge-info {
+    @apply bg-info/10 text-info border-info/20 text-xs sm:text-sm;
+  }
+  
+  /* Enhanced tag button animations */
+  .tag-button {
+    @apply relative overflow-hidden transition-all duration-300 ease-in-out;
+  }
+  
+  .tag-button::before {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-primary/80 via-primary/60 to-primary/40 
+      transform scale-x-0 origin-left transition-transform duration-300 ease-out;
+  }
+  
+  .tag-button:hover::before {
+    @apply transform scale-x-100;
+  }
+  
+  .tag-button::after {
+    content: '';
+    @apply absolute inset-0 bg-primary/5 dark:bg-primary/10 opacity-0 transition-opacity duration-300 ease-out;
+  }
+  
+  .tag-button:hover::after {
+    @apply opacity-100;
+  }
+  
+  .tag-button:hover {
+    @apply translate-y-[-2px] shadow-md;
+  }
+  
+  .tag-button-content {
+    @apply relative z-10 transition-all duration-300;
+  }
+  
+  .tag-button:hover .tag-button-content {
+    @apply transform scale-[1.02];
+  }
+  
+  /* Active tag styling */
+  .tag-button.active::before {
+    @apply scale-x-100;
+  }
+  
+  .tag-button.active::after {
+    @apply opacity-100 bg-primary/10 dark:bg-primary/20;
+  }
+  
+  /* Additional styling for the template cards */
+  .template-card {
+    @apply transition-all duration-300 border border-primary/10 bg-card/60 backdrop-blur-sm;
+  }
+  
+  .template-card:hover {
+    @apply border-primary/30 shadow-lg shadow-primary/10 bg-gradient-to-br from-card to-background;
+    transform: translateY(-2px) scale(1.01);
+  }
+  
+  /* Badge hover effects */
+  .template-badge {
+    @apply transition-all duration-200 hover:ring hover:ring-primary/30 hover:bg-primary/5;
+  }
+  
+  /* Accordion animations */
+  .template-accordion {
+    @apply transition-all duration-300;
+  }
+  
+  .template-accordion:hover {
+    @apply bg-muted/10 border-primary/30;
+  }
+  
+  /* Button animation effects */
+  .pulse-on-hover:hover {
+    animation: pulse-glow 1.5s infinite;
+  }
+  
+  /* Use button shine effect */
+  .use-button {
+    @apply relative overflow-hidden;
+  }
+  
+  .use-button::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.3) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotate(45deg);
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+  
+  .use-button:hover::after {
+    animation: shine 1s ease-out;
+  }
+  
+  .templates-container .accordion-trigger[data-state="open"] {
+    @apply bg-primary/10;
+  }
+  
+  .templates-container .accordion-trigger[data-state="open"] .icon {
+    @apply text-primary;
+  }
+
+  /* Mobile responsive optimizations - Enhanced */
+  .mobile-container {
+    @apply px-2 sm:px-4 md:px-6 py-2 sm:py-4;
+  }
+
+  .mobile-text {
+    @apply text-xs sm:text-sm md:text-base;
+  }
+
+  .mobile-heading {
+    @apply text-sm sm:text-base md:text-lg lg:text-xl;
+  }
+
+  .mobile-large-heading {
+    @apply text-lg sm:text-xl md:text-2xl lg:text-3xl;
+  }
+
+  .mobile-gap {
+    @apply gap-1 sm:gap-2 md:gap-4;
+  }
+
+  .mobile-padding {
+    @apply p-1.5 sm:p-2 md:p-3;
+  }
+
+  .mobile-icon {
+    @apply h-3.5 w-3.5 sm:h-4 sm:w-4 md:h-5 md:w-5;
+  }
+
+  .mobile-button {
+    @apply px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 text-sm sm:text-base;
+  }
+
+  .mobile-card {
+    @apply p-3 sm:p-4 md:p-6 rounded-lg sm:rounded-xl;
+  }
+  
+  /* Landing page specific styles */
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary via-primary/60 to-primary/80 bg-clip-text text-transparent;
+  }
+  
+  .card-hover {
+    @apply hover:shadow-lg hover:-translate-y-1 transition-all duration-300;
+  }
+  
+  .glass-card {
+    @apply bg-card/40 backdrop-blur-md border border-primary/10;
+  }
+  
+  .feature-icon-gradient {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--wiggly-700)));
+  }
+  
+  /* Additional utilities for landing page */
+  .section-padding {
+    @apply py-8 sm:py-12 md:py-16 lg:py-24 px-2 sm:px-4;
+  }
+  
+  /* Note editor specific styling for lists */
+  .note-editor-content {
+    @apply text-foreground;
+  }
+  
+  .note-editor-content ul {
+    list-style-type: disc !important;
+    padding-left: 1.5rem !important;
+    margin: 0.5rem 0 !important;
+  }
+  
+  .note-editor-content ol {
+    list-style-type: decimal !important;
+    padding-left: 1.5rem !important;
+    margin: 0.5rem 0 !important;
+  }
+  
+  .note-editor-content li {
+    margin: 0.25rem 0 !important;
+  }
+  
+  .note-editor-content ul ul,
+  .note-editor-content ol ul {
+    list-style-type: circle !important;
+  }
+  
+  .note-editor-content ul ol,
+  .note-editor-content ol ol {
+    list-style-type: lower-alpha !important;
+  }
+}
+
+/* Advanced animations */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes orbit {
+  0% {
+    transform: rotate(0deg) translateX(8px) rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg) translateX(8px) rotate(-360deg);
+  }
+}
+
+.float {
+  animation: float 5s ease-in-out infinite;
+}
+
+/* Gaming-style preloader animations */
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px hsl(var(--primary) / 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.8);
+  }
+}
+
+@keyframes shine {
+  0% {
+    opacity: 0;
+    transform: rotate(45deg) translate(-100%, -100%);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(45deg) translate(100%, 100%);
+  }
+}
+
+@keyframes loading-dots {
+  0%, 20% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  80%, 100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+}
+
+/* Preloader utility classes */
+.preloader-gradient {
+  background: linear-gradient(-45deg, hsl(var(--primary)), hsl(var(--wiggly-500)), hsl(var(--primary)), hsl(var(--wiggly-700)));
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+.loading-dots {
+  animation: loading-dots 1.5s ease-in-out infinite;
+}
+
+.gaming-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 0 5px rgba(var(--primary), 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(var(--primary), 0.8);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(var(--primary), 0.5);
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Enhanced shine effect for cards */
+@keyframes shine {
+  0% {
+    left: -100%;
+    opacity: 0;
+  }
+  20% {
+    left: 100%;
+    opacity: 0.4;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+.shine-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine-effect::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 80%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transform: skewX(-25deg);
+  transition: all 0.7s ease;
+}
+
+.shine-effect:hover::after {
+  animation: shine 1.5s ease-in-out;
+}
+
+/* Template card entrance animations */
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+    filter: blur(5px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+.card-entrance {
+  animation: cardEntrance 0.5s cubic-bezier(0.230, 1.000, 0.320, 1.000) forwards;
+}
+
+/* Pulsing badge effect */
+@keyframes badgePulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(155, 135, 245, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(155, 135, 245, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(155, 135, 245, 0);
+  }
+}
+
+.badge-pulse {
+  animation: badgePulse 2s infinite;
+}
+
+/* Mobile-specific fixes and optimizations */
+@media (max-width: 640px) {
+  /* Fix for horizontal scrolling issues */
+  .full-width-container {
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+  }
+
+  /* Smaller text sizes for mobile */
+  body {
+    font-size: 0.875rem;
+  }
+
+  /* Input and form field sizing - prevents iOS zoom */
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+
+  /* Button optimizations for touch */
+  button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Fix for charts responsiveness */
+  .recharts-responsive-container {
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  /* Mobile spacing optimizations */
+  .container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  /* Reduce excessive margins on mobile */
+  .space-y-16 > * + * {
+    margin-top: 2rem !important;
+  }
+
+  .space-y-12 > * + * {
+    margin-top: 1.5rem !important;
+  }
+
+  /* Optimize grid layouts for mobile */
+  .grid-cols-2 {
+    gap: 0.75rem !important;
+  }
+
+  /* Touch-friendly interactive elements */
+  .cursor-pointer {
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Enhanced tooltip animations */
+@keyframes tooltip-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(5px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes tooltip-slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-5px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes tooltip-slide-right {
+  from {
+    opacity: 0;
+    transform: translateX(-5px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes tooltip-slide-left {
+  from {
+    opacity: 0;
+    transform: translateX(5px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes tooltip-glow {
+  0%, 100% {
+    box-shadow: 0 0 4px rgba(var(--primary), 0.2);
+  }
+  50% {
+    box-shadow: 0 0 8px rgba(var(--primary), 0.4);
+  }
+}
+
+@keyframes tooltip-fade-out {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+}
+
+/* Add this to the existing animations in the tailwind.config.ts */
+@keyframes pulse-subtle {
+  0%, 100% { 
+      opacity: 1;
+      transform: scale(1);
+  }
+  50% { 
+      opacity: 0.95;
+      transform: scale(1.02); 
+  }
+}
+
+/* Animation utilities */
+.animate-tooltip-slide-up {
+  animation: tooltip-slide-up 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-tooltip-slide-down {
+  animation: tooltip-slide-down 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-tooltip-slide-right {
+  animation: tooltip-slide-right 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-tooltip-slide-left {
+  animation: tooltip-slide-left 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-tooltip-glow {
+  animation: tooltip-glow 2s infinite;
+}
+
+.animate-tooltip-fade-out {
+  animation: tooltip-fade-out 200ms forwards;
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 2s ease-in-out infinite;
+}
+
+/* Prevent content overflow */
+#root, body, html {
+  overflow-x: hidden;
+}

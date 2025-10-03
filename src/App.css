@@ -1,0 +1,85 @@
+
+#root {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em rgba(155, 135, 245, 0.7));
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em rgba(155, 135, 245, 0.7));
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 1em;
+}
+
+/* Responsive padding adjustments */
+@media (max-width: 640px) {
+  .card {
+    padding: 1em 0.75em;
+  }
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* Purple glow effects */
+.purple-glow {
+  box-shadow: 0 0 15px rgba(155, 135, 245, 0.5);
+}
+
+.purple-glow:hover {
+  box-shadow: 0 0 25px rgba(155, 135, 245, 0.7);
+}
+
+/* Glass card styles */
+.glass-card {
+  backdrop-filter: blur(8px);
+  background: rgba(155, 135, 245, 0.05);
+  border: 1px solid rgba(155, 135, 245, 0.1);
+}
+
+/* Mobile-specific utility classes */
+@media (max-width: 640px) {
+  .mobile-p-reduced {
+    padding: 0.5rem !important;
+  }
+  
+  .mobile-text-sm {
+    font-size: 0.875rem !important;
+  }
+  
+  .mobile-text-xs {
+    font-size: 0.75rem !important;
+  }
+
+  .mobile-hide-overflow {
+    overflow: hidden;
+  }
+}

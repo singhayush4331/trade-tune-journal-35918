@@ -1,0 +1,46 @@
+
+# Wiggly Trading Journal Robots.txt
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://wiggly.co.in/sitemap.xml
+
+# Allow Google bots with no restrictions
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Googlebot-Mobile
+Allow: /
+
+# Allow Bing bots
+User-agent: Bingbot
+Allow: /
+
+# Allow social media bots
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+# Block certain paths that shouldn't be indexed
+Disallow: /admin/
+Disallow: /private/
+Disallow: /api/
+Disallow: /error/
+Disallow: /*?*
+
+# Allow crawling of key content pages
+Allow: /dashboard
+Allow: /trades
+Allow: /calendar
+Allow: /gallery
+Allow: /wiggly-AI
+Allow: /notebook
+Allow: /playbooks
+Allow: /funds
+Allow: /features/
